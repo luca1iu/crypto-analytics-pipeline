@@ -1,0 +1,17 @@
+# Secrets — never commit these
+.env
+gcp-key.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# dbt
+dbt/target/
+dbt/logs/
+dbt/.user.yml
+
+# Docker
+*.log
