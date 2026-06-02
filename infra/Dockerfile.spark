@@ -1,0 +1,38 @@
+FROM apache/spark:3.5.0
+
+USER root
+
+RUN apt-get update && apt-get install -y wget && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
+# Kafka connector
+RUN wget -q -O /opt/spark/jars/spark-sql-kafka.jar \
+    https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.5.0/spark-sql-kafka-0-10_2.12-3.5.0.jar
+
+# Kafka clients
+RUN wget -q -O /opt/spark/jars/kafka-clients.jar \
+    https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.4.1/kafka-clients-3.4.1.jar
+
+# Spark token provider for Kafka
+RUN wget -q -O /opt/spark/jars/spark-token-provider-kafka.jar \
+    https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.5.0/spark-token-provider-kafka-0-10_2.12-3.5.0.jar
+
+# commons-pool2 — required by Kafka consumer internals
+RUN wget -q -O /opt/spark/jars/commons-pool2.jar \
+    https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar
+
+# BigQuery connector
+RUN wget -q -O /opt/spark/jars/spark-bigquery.jar \
+    https://repo1.maven.org/maven2/com/google/cloud/spark/spark-bigquery-with-dependencies_2.12/0.34.0/spark-bigquery-with-dependencies_2.12-0.34.0.jar
+
+
+RUN wget -q -O /opt/spark/jars/gcs-connector.jar \
+    https://storage.googleapis.com/hadoop-lib/gcs/gcs-connector-hadoop3-latest.jar
+    
+COPY spark/ /opt/spark-jobs/
+
+WORKDIR /opt/spark-jobs
+
+USER 185

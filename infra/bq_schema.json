@@ -1,0 +1,14 @@
+[
+  {"name": "chain",             "type": "STRING",    "mode": "NULLABLE"},
+  {"name": "tx_hash",           "type": "STRING",    "mode": "NULLABLE"},
+  {"name": "block_number",      "type": "INTEGER",   "mode": "REQUIRED"},
+  {"name": "block_timestamp",   "type": "TIMESTAMP", "mode": "REQUIRED"},
+  {"name": "from_address",      "type": "STRING",    "mode": "NULLABLE"},
+  {"name": "to_address",        "type": "STRING",    "mode": "NULLABLE"},
+  {"name": "value_eth",         "type": "FLOAT64",   "mode": "NULLABLE"},
+  {"name": "gas_limit",         "type": "INTEGER",   "mode": "NULLABLE"},
+  {"name": "gas_price_gwei",    "type": "FLOAT64",   "mode": "NULLABLE"},
+  {"name": "tx_fee_eth",        "type": "FLOAT64",   "mode": "NULLABLE"},
+  {"name": "input_data",        "type": "STRING",    "mode": "NULLABLE"},
+  {"name": "ingested_at",       "type": "TIMESTAMP", "mode": "NULLABLE"}
+]
