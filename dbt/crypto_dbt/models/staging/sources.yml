@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: raw
+    database: crypto-analytics-495919
+    schema: raw
+    tables:
+      - name: transactions
